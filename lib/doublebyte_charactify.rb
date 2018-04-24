@@ -1,10 +1,10 @@
-require "mastodon_command/version"
-require "mastodon_command/convert"
-require "mastodon_command/convert_random"
-require "mastodon_command/convert_lang"
-require "mastodon_command/statuses_controller"
+require "doublebyte_charactify/version"
+require "doublebyte_charactify/convert"
+require "doublebyte_charactify/convert_random"
+require "doublebyte_charactify/convert_lang"
+require "doublebyte_charactify/statuses_controller"
 
-module MastodonCommand
+module DoubleByteCharactify
   def self.setup(&proc)
     # create function for Monkey patch
     extend self

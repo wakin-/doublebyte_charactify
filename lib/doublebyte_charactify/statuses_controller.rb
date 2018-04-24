@@ -1,6 +1,5 @@
 module ApiV1StatusesControllerPatch
   def create
-    status = MastodonCommand.convert_toot(status_params[:status])
     @status = PostStatusService.new.call(current_user.account,
                                          status,
                                          status_params[:in_reply_to_id].blank? ? nil : Status.find(status_params[:in_reply_to_id]),
@@ -11,6 +10,7 @@ module ApiV1StatusesControllerPatch
                                          application: doorkeeper_token.application,
                                          idempotency: request.headers['Idempotency-Key'])
 
+    @status = DoublebyteCharactify.convert_status(@status)
     render json: @status, serializer: REST::StatusSerializer
   end
 end
