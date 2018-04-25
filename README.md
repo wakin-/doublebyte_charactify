@@ -1,9 +1,5 @@
 # DoublebyteCharactify
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/doublebyte_charactify`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +18,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+- Make initializers file
+config\initializers\doublebyte_charactify.rb
+
+```ruby
+DoublebyteCharactify.setup do |content, tags|
+  zenkaku = DoublebyteCharactify::Converter.new()
+  zenkaku.convert(content, tags)
+end
+```
+
+- toot by mastodon
+
+```text
+hankaku to zenkaku #全角芸
+```
 
 ## Development
 

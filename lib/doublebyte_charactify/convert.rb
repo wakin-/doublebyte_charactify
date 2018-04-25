@@ -1,11 +1,12 @@
-module DoublebyteCharactiy
-  def convert(status)
-    Rails.logger.info status.content
-    if status.tags.select { | tag| tag.name === '全角芸' }
-      doc = Nokogiri::HTML.parse(status.content)
-      doc.traverse do |e| e.content = e.content.tr('a-zA-Z/.:', 'ａ-ｚＡ-Ｚ／．：') if e.text? end
-      status.content = doc.to_html
+module DoublebyteCharactify
+  class Converter
+    def convert(content, tags)
+      if !(tags.select { |tag| tag.name === '全角芸' }).blank?
+        doc = Nokogiri::XML.parse(content)
+        doc.traverse do |e| e.content = e.content.tr('0-9a-zA-Z/\\\.:#\-_"\' ', '０-９ａ-ｚＡ-Ｚ／＼．：＃ー＿”’　') if e.text? end
+        content = doc.to_xhtml(:encoding => 'UTF-8')
+      end
+      content
     end
-    status
   end
 end

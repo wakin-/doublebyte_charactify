@@ -1,10 +1,8 @@
 require "doublebyte_charactify/version"
 require "doublebyte_charactify/convert"
-require "doublebyte_charactify/convert_random"
-require "doublebyte_charactify/convert_lang"
-require "doublebyte_charactify/statuses_controller"
+require "doublebyte_charactify/status_serializer"
 
-module DoubleByteCharactify
+module DoublebyteCharactify
   def self.setup(&proc)
     # create function for Monkey patch
     extend self
@@ -12,14 +10,14 @@ module DoubleByteCharactify
     class << self;
       self
     end).module_eval do
-      define_method 'convert_toot', &proc
+      define_method 'convert_content', &proc
       # define_method 'b' do
       #   p 'b'
       # end
     end
 
     # Monkey patch
-    Api::V1::StatusesController.prepend(ApiV1StatusesControllerPatch)
+    REST::StatusSerializer.prepend(RESTStatusSerializerPatch)
   end
 end
 
