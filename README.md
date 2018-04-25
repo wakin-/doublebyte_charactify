@@ -18,10 +18,9 @@ And then execute:
 config\initializers\doublebyte_charactify.rb
 
 ```ruby
-DoublebyteCharactify.setup do |content, tags|
-  zenkaku = DoublebyteCharactify::Converter.new()
-  zenkaku.convert(content, tags)
-end
+require_relative "inflections"
+require Rails.root.join("app/serializers/activitypub/note_serializer")
+DoublebyteCharactify.patch()
 ```
 
 - toot by mastodon

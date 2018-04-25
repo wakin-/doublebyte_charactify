@@ -4,22 +4,8 @@ require "doublebyte_charactify/status_serializer"
 require "doublebyte_charactify/note_serializer"
 
 module DoublebyteCharactify
-  def self.setup(&proc)
-    # create function for Monkey patch
-    extend self
-    (
-    class << self;
-      self
-    end).module_eval do
-      define_method 'convert_content', &proc
-      # define_method 'b' do
-      #   p 'b'
-      # end
-    end
-
-    # Monkey patch
+  def self.patch
     REST::StatusSerializer.prepend(RESTStatusSerializerPatch)
     ActivityPub::NoteSerializer.prepend(ActivityPubNoteSerializerPatch)
   end
 end
-
